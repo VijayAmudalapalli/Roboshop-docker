@@ -2,6 +2,8 @@ services:
   mongodb:
     image: vijayamudalapalli/mongodb:v1
     container_name: mongodb
+    volumes: # -v mongodb:/data/db
+      - mongodb:/data/db
   catalogue:
     image: vijayamudalapalli/catalogue:v1
     container_name: catalogue
@@ -10,17 +12,23 @@ services:
   redis:
     image: redis:7
     container_name: redis
+    volumes:
+      - redis:/data
   mysql:
     image: vijayamudalapalli/mysql:v1
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: "Roboshop@1"
+    volumes:
+      - mysql:/var/lib/mysql
   rabbitmq:
     image: rabbitmq:3
     container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
   user:
     image: vijayamudalapalli/user:v1
     container_name: user
@@ -62,3 +70,8 @@ networks:
     driver: bridge
     name: roboshop
     external: true # true if you have created network manually using "docker network create roboshop" command
+volumes:
+  mongodb: # to create a named volume for mongodb data persistence -> "docker volume create mongodb"
+  redis:
+  mysql:
+  rabbitmq:
