@@ -1,10 +1,16 @@
 services:
   mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
     image: vijayamudalapalli/mongodb:v1
     container_name: mongodb
     volumes: # -v mongodb:/data/db
       - mongodb:/data/db
   catalogue:
+    build:
+      context: ./catalogue
+      dockerfile: Dockerfile
     image: vijayamudalapalli/catalogue:v1
     container_name: catalogue
     depends_on:
@@ -15,6 +21,9 @@ services:
     volumes:
       - redis:/data
   mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     image: vijayamudalapalli/mysql:v1
     container_name: mysql
     environment:
@@ -30,24 +39,36 @@ services:
     volumes:
       - rabbitmq:/var/lib/rabbitmq
   user:
+    build:
+      context: ./user
+      dockerfile: Dockerfile
     image: vijayamudalapalli/user:v1
     container_name: user
     depends_on:
       - mongodb
       - redis
   cart:
+    build:
+      context: ./cart
+      dockerfile: Dockerfile
     image: vijayamudalapalli/cart:v1
     container_name: cart
     depends_on:
       - catalogue
       - redis
   shipping:
+    build:
+      context: ./shipping
+      dockerfile: Dockerfile
     image: vijayamudalapalli/shipping:v1
     container_name: shipping
     depends_on:
       - mysql
       - cart
   payment:
+    build:
+      context: ./payment
+      dockerfile: Dockerfile
     image: vijayamudalapalli/payment:v1
     container_name: payment
     depends_on:
@@ -55,6 +76,9 @@ services:
       - cart
       - user
   frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     image: vijayamudalapalli/frontend:v1
     container_name: frontend
     ports:
