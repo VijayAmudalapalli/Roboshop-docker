@@ -48,7 +48,7 @@
 # CMD ["uwsgi", "--ini", "payment.ini"]
 
 
-Gemini AI Code:
+# Gemini AI Code:
 # ===========================
 # Stage 1: Builder
 # ===========================
