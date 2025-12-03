@@ -93,7 +93,7 @@ networks:
   default:
     driver: bridge
     name: roboshop
-    external: true # true if you have created network manually using "docker network create roboshop" command
+    external: false # true if you have created network manually using "docker network create roboshop" command
 volumes:
   mongodb: # to create a named volume for mongodb data persistence -> "docker volume create mongodb"
   redis:
